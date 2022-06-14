@@ -3,14 +3,14 @@ from flask import Flask, request, jsonify, render_template
 import pickle
 
 # Create flask app
-flask_app = Flask(__name__)
+app = Flask(__name__)
 model = pickle.load(open("model.pkl", "rb"))
 
-@flask_app.route("/")
+@app.route("/")
 def Home():
     return render_template("index.html")
     
-@flask_app.route("/predict", methods = ["POST"])
+@app.route("/predict", methods = ["POST"])
 def predict():
     Fuel_Type_Diesel=0
     if request.method == 'POST':
@@ -47,4 +47,4 @@ def predict():
         return render_template('index.html')
 
 if __name__ == "__main__":
-    flask_app.run(debug=True)
+    app.run(debug=True)
